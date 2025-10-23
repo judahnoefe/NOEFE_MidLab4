@@ -1,0 +1,8 @@
+<div class="task-filter">
+  <span>Show:</span>
+  <button (click)="setFilter('all')" [class.active]="currentFilter === 'all'">All</button>
+  <button (click)="setFilter('pending')" [class.active]="currentFilter === 'pending'">Active</button>
+  <button (click)="setFilter('completed')" [class.active]="currentFilter === 'completed'">Completed</button>
+
+  <span class="remaining">{{ remainingCount }} tasks remaining</span>
+</div>

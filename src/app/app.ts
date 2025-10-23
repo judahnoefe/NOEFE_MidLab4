@@ -1,12 +1,23 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TaskListComponent } from './tasklist/tasklist';
+import { TaskFilterComponent } from './taskfilter/taskfilter';
+import { TaskFormComponent } from './taskform/taskform';
+import { TaskService } from './services/taskservice';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, TaskFormComponent, TaskFilterComponent, TaskListComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'],
+  providers: [TaskService]
 })
-export class App {
-  protected readonly title = signal('NOEFE_MidLab4');
+export class AppComponent {
+  title = 'Task Manager';
+  constructor(private taskService: TaskService) {}
+
+  onAddTask(description: string) {
+    this.taskService.addTask(description);
+  }
 }

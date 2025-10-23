@@ -1,0 +1,16 @@
+<div class="task-list">
+  <ul>
+    <li *ngFor="let task of tasks" class="task-item">
+      <input type="checkbox" [checked]="task.isCompleted" (change)="toggleComplete(task)"/>
+      <div class="task-content">
+        <span *ngIf="editingId !== task.id" class="task-text" [class.completed]="task.isCompleted" (click)="startEdit(task)">{{ task.description }}</span>
+        <input *ngIf="editingId === task.id" [(ngModel)]="editText" (blur)="saveEdit(task)" (keydown)="onKeydown($event, task)" class="task-edit-input" autofocus/>
+        <small class="meta">{{ task.createdAt | date: 'short' }}</small>
+      </div>
+      <button class="delete-btn" (click)="deleteTask(task)">x</button>
+    </li>
+  </ul>
+  <div *ngIf="tasks.length === 0" class="empty">
+    No tasks to show.
+  </div>
+</div>
